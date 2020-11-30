@@ -1,0 +1,18 @@
+```{r, child = "_setup.Rmd"}
+```
+
+# Auto margins
+
+In most modern browsers you want to horizontally center a tag element using the
+flex layout. Alternatively, you can horizontally center an element using
+`margin(.., horizontal = "auto")`.
+
+```{r}
+div(
+  .style %>%
+    margin(v = 2, h = "auto") %>%  # <-
+    padding(3) %>%
+    background("teal"),
+  "Nam a sapien. Integer placerat tristique nisl."
+)
+```
