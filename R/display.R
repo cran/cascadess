@@ -1,53 +1,61 @@
-display_type_ <- c(
-  inline = "inline",
-  `inline-block` = "inline-block",
-  block = "block",
-  grid = "grid",
-  table = "table",
-  `table-cell` = "table-cell",
-  `table-row` = "table-row",
-  flex = "flex",
-  `inline-flex` = "inline-flex",
-  none = "none"
+display_values <- chr(
+  "none" = "none",
+  "inline" = "inline",
+  "inline-block" = "inline-block",
+  "block" = "block",
+  "grid" = "grid",
+  "inline-grid" = "inline-grid",
+  "table" = "table",
+  "table-cell" = "table-cell",
+  "table-row" = "table-row",
+  "flex" = "flex",
+  "inline-flex" = "inline-flex"
 )
-
-display_type <- function(type) {
-  responsive(pick(type, from = display_type_))
-}
 
 #' Display
 #'
-#' The `display()` function adjusts how a tag element is rendered. For example,
-#' to use the flex box layout the display must be `"flex"`.
+#' The `display()` function adjusts how a tag element and its contents are
+#' rendered.
 #'
-#' @inheritParams background
+#' @param x `r param_subject()`
 #'
-#' @param type A [responsive] argument.
+#' @param ... A character string specifying a display type. One of,
 #'
-#'   One of `r rd_list(names(display_type_))`.
+#'   `r rd_bullets(names(display_values))`
 #'
-#' @includeRmd man/roxygen/display.Rmd
+#'   Use name-value pairs to specify [breakpoints].
+#'
+#' @returns `r returns_same("x")`
 #'
 #' @export
+#'
 #' @examples
 #'
 #' library(htmltools)
 #'
-#' # When using flex make sure you specify the flex display.
 #' div(
 #'   .style %>%
 #'     display("flex") %>%
-#'     flex(justify = "center"),
+#'     flex_justify("center"),
 #'   "Powerful stuff"
 #' )
 #'
-display <- function(x, type) {
-  assert_subject(x)
-
-  class <- prefix(
-    display = "d",
-    display_type(type)
+#' div(
+#'   .style %>%
+#'     display(
+#'       xs = "inline",
+#'       md = "block"
+#'     ),
+#'   "Block and roll"
+#' )
+#'
+display <- function(x, ...) {
+  add_class(
+    x,
+    compose_class(
+      "d",
+      display_values,
+      ...
+    )
   )
-
-  add_class(x, class)
 }

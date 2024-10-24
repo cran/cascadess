@@ -4,14 +4,24 @@
 \alias{float}
 \title{Floats}
 \usage{
-float(x, side)
+float(x, ...)
 }
 \arguments{
 \item{x}{A tag element or \link{.style} pronoun.}
 
-\item{side}{A \link{responsive} argument.
+\item{...}{One of the following,
+\itemize{
+\item \code{"left"}
+\item \code{"l"}
+\item \code{"right"}
+\item \code{"r"}
+\item \code{"none"}
 
-One of \code{"left"}, \code{"left"}, \code{"right"}, \code{"right"}, or \code{"none"} specifying the side to float the element.}
+Name-value pairs to specify \link{breakpoints}.
+}}
+}
+\value{
+An object of the same type as \code{x}.
 }
 \description{
 The \code{float()} function places an element to the left or right side of its
@@ -25,14 +35,14 @@ library(htmltools)
 div(
   div(
     .style \%>\%
-      border("red") \%>\%
+      border_color("danger") \%>\%
       float("left"),
-    "Warning"
+    "6.5/10"
   ),
   div(
-    "Nam a sapien.",
-    "Phasellus neque orci, porta a, aliquet quis, semper a, massa.",
-    "Phasellus lacus."
+    "Considering the need for opening sentences.",
+    "We may want to reconsider the necessity of second or third sentences.",
+    "The whole problem may be avoided by never creating a problem."
   )
 )
 

@@ -1,4 +1,4 @@
-position_value_ <- c(
+position_method_values <- chr(
   static = "static",
   relative = "relative",
   absolute = "absolute",
@@ -6,88 +6,39 @@ position_value_ <- c(
   sticky = "sticky"
 )
 
-position_value <- function(value) {
-  pick(value, from = position_value_)
-}
-
-position_side_ <- c(
-  `0` = 0,
-  `50` = 50,
-  `100` = 100
-)
-
-position_top <- function(top) {
-  compose("t", pick(top, from = position_side_))
-}
-
-position_right <- function(right) {
-  compose("r", pick(right, from = position_side_))
-}
-
-position_bottom <- function(bottom) {
-  compose("b", pick(bottom, from = position_side_))
-}
-
-position_left <- function(left) {
-  compose("l", pick(left, from = position_side_))
-}
-
-position_by_ <- c(
-  edge = "",
-  center = "by-center"
-)
-
-position_by <- function(by) {
-  x <- pick(by, from = position_by_)
-
-  if (by == "edge") {
-    NULL
-  } else if (by == "center") {
-    x
-  }
-}
-
-#' Position an element
+#' Positioning elements
 #'
-#' The `position()` adjusts how an element is positioned. Positioning could be
-#' absolute or relative. Furthermore, you can arrange an element within its parent
-#' element using `top`, `right`, `bottom`, or `left`.
+#' The `position_*()` functions adjust set the position of an element.
 #'
-#' @inheritParams background
+#' @param x `r param_subject()`
 #'
-#' @param value One of `r rd_list(position_value_)` specifying how the element is
-#'   positioned.
+#' @param method A character string specifying the positioning method. One of,
 #'
-#' @param top,right,bottom,left One of `r rd_list(position_side_)` specifying
-#'   where the element is positioned. By default these values position an
-#'   element using the element's edge, see argument `by`. Defaults to `NULL`, in
-#'   which case the argument is ignored.
+#'   `r rd_bullets(names(position_method_values))`
 #'
-#' @param by One of `r rd_list(position_by_)` specifying the element's
-#'   positioning anchor, defaults to `"edge"`.
+#' @returns `r returns_same("x")`
+#'
+#' @family position utilities
 #'
 #' @export
+#'
 #' @examples
 #'
 #' library(htmltools)
 #'
 #' div(
-#'   div(.style %>% position("absolute", t = 0, r = 0))
+#'   .style %>%
+#'     position("absolute") %>%
+#'     position_top(50)
 #' )
 #'
-position <- function(x, value, top = NULL, right = NULL, bottom = NULL,
-                     left = NULL, by = "edge") {
-  assert_subject(x)
-
-  classes <- prefix(
-    "position",
-    position_value(value),
-    position_top(top),
-    position_right(right),
-    position_bottom(bottom),
-    position_left(left),
-    position_by(by)
+position <- function(x, method) {
+  add_class(
+    x,
+    compose_class(
+      "position",
+      position_method_values,
+      method
+    )
   )
-
-  add_class(x, classes)
 }

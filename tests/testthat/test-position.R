@@ -1,12 +1,8 @@
-context("position()")
+test_that("adds classes", {
+  x <- div(.style %>% position("relative"))
+  y <- div(.style %>% position("fixed"))
 
-test_that("adds class", {
-  div(.style %>% position("fixed")) %>%
-    expect_s3_class("shiny.tag") %>%
-    expect_html_class("cas-position-fixed")
-})
-
-test_that("`by` argument", {
-  div(.style %>% position("absolute", by = "center")) %>%
-    expect_html_class("cas-position-by-center")
+  expect_s3_class(x, "shiny.tag")
+  expect_html_class(x, "position-relative")
+  expect_html_class(y, "position-fixed")
 })

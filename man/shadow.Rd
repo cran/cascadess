@@ -2,106 +2,44 @@
 % Please edit documentation in R/shadow.R
 \name{shadow}
 \alias{shadow}
-\title{Shadows}
+\title{Visual depth}
 \usage{
 shadow(x, size)
 }
 \arguments{
 \item{x}{A tag element or \link{.style} pronoun.}
 
-\item{size}{One of \code{"small"}, \code{"sm"}, \code{"medium"}, \code{"md"}, \code{"large"}, \code{"lg"}, or \code{"none"} specifying the amount
-of shadow added.}
+\item{size}{A character string specifying the shadow size. One of,
+\itemize{
+\item \code{"small"}
+\item \code{"sm"}
+\item \code{"medium"}
+\item \code{"md"}
+\item \code{"large"}
+\item \code{"lg"}
+\item \code{"none"}
+}}
+}
+\value{
+An object of the same type as \code{x}.
 }
 \description{
-The \code{shadow()} function adjusts the box shadow of a tag element. Shadows help
-distinguish elements or indicate interactivity.
+The \code{shadow()} function adjusts the box shadow of a tag element.
 }
-\section{Sizes}{
-\if{html}{\out{
-<!--html_preserve-->
-}}
-\if{html}{\out{
-<div class="cas-d-flex">
-}}
-\if{html}{\out{
-<div class="cas-m-3 cas-p-4 cas-shadow-sm">
-}}
-
-
-small\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-<div class="cas-m-3 cas-p-4 cas-shadow-sm">
-}}
-
-
-sm\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-<div class="cas-m-3 cas-p-4 cas-shadow-md">
-}}
-
-
-medium\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-<div class="cas-m-3 cas-p-4 cas-shadow-md">
-}}
-
-
-md\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-<div class="cas-m-3 cas-p-4 cas-shadow-lg">
-}}
-
-
-large\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-<div class="cas-m-3 cas-p-4 cas-shadow-lg">
-}}
-
-
-lg\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-<div class="cas-m-3 cas-p-4 cas-shadow-none">
-}}
-
-
-none\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-</div>
-}}
-\if{html}{\out{
-<!--/html_preserve-->
-}}
-}
-
 \examples{
 
 library(htmltools)
 
 div(
   .style \%>\%
-    shadow("md"),
-  "Donec posuere augue in quam."
+    shadow("small")
 )
 
 div(
   .style \%>\%
-    border("red") \%>\%
-    shadow("small"),
-  "Praesent augue."
+    border_color(theme_warning()) \%>\%
+    background_color(theme_warning()) \%>\%
+    shadow("medium")
 )
 
 }

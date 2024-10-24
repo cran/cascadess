@@ -1,4 +1,4 @@
-float_side_ <- c(
+float_values <- chr(
   left = "left",
   l = "left",
   right = "right",
@@ -6,23 +6,24 @@ float_side_ <- c(
   none = "none"
 )
 
-float_side <- function(side) {
-  responsive(pick(side, from = float_side_))
-}
-
 #' Floats
 #'
 #' The `float()` function places an element to the left or right side of its
 #' parent element. Other text and inline elements wrap around floated elements.
 #' Note, `float()` has no effect on flex items.
 #'
-#' @inheritParams background
+#' @param x `r param_subject()`
 #'
-#' @param side A [responsive] argument.
+#' @param ... One of the following,
 #'
-#'   One of `r rd_list(float_side_)` specifying the side to float the element.
+#'   `r rd_bullets(names(float_values))`
+#'
+#'   Name-value pairs to specify [breakpoints].
+#'
+#' @returns `r returns_same("x")`
 #'
 #' @export
+#'
 #' @examples
 #'
 #' library(htmltools)
@@ -30,24 +31,24 @@ float_side <- function(side) {
 #' div(
 #'   div(
 #'     .style %>%
-#'       border("red") %>%
+#'       border_color("danger") %>%
 #'       float("left"),
-#'     "Warning"
+#'     "6.5/10"
 #'   ),
 #'   div(
-#'     "Nam a sapien.",
-#'     "Phasellus neque orci, porta a, aliquet quis, semper a, massa.",
-#'     "Phasellus lacus."
+#'     "Considering the need for opening sentences.",
+#'     "We may want to reconsider the necessity of second or third sentences.",
+#'     "The whole problem may be avoided by never creating a problem."
 #'   )
 #' )
 #'
-float <- function(x, side) {
-  assert_subject(x)
-
-  classes <- prefix(
-    "float",
-    float_side(side)
+float <- function(x, ...) {
+  add_class(
+    x,
+    compose_class(
+      "float",
+      float_values,
+      ...
+    )
   )
-
-  add_class(x, classes)
 }

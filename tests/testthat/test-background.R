@@ -1,14 +1,12 @@
-context("background()")
+test_that("adds classes", {
+  x <- div(.style %>% background_color(theme_primary()))
 
-library(htmltools)
-
-test_that("add classes", {
-  div(.style %>% background("red")) %>%
-    expect_s3_class("shiny.tag") %>%
-    expect_html_class("cas-bg-red")
+  expect_shiny_tag(x)
+  expect_html_class(x, "bg-primary")
 })
 
-test_that("spliced return", {
-  .style %>% background("red") %>%
-    expect_s3_class("rlang_box_splice")
+test_that(".style remains spliced", {
+  .style %>%
+    background_color(theme_primary()) %>%
+    expect_is_splice_box()
 })

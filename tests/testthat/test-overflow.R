@@ -1,22 +1,16 @@
-context("overflow()")
+test_that("adds html class", {
+  x <- div(.style %>% overflow_all("auto"))
 
-test_that("adds class", {
-  div() %>%
-    overflow("auto") %>%
-    expect_s3_class("shiny.tag") %>%
-    expect_html_class("cas-overflow-auto")
+  expect_s3_class(x, "shiny.tag")
+  expect_html_class(x, "overflow-auto")
 
-  div(.style %>% overflow("hidden")) %>%
-    expect_s3_class("shiny.tag") %>%
-    expect_html_class("cas-overflow-hidden")
-})
+  y <- div(.style %>% overflow_horizontal("hidden"))
 
-test_that("argument scroll shortcuts", {
-  div() %>%
-    overflow(FALSE) %>%
-    expect_html_class("cas-overflow-hidden")
+  expect_s3_class(y, "shiny.tag")
+  expect_html_class(y, "overflow-x-hidden")
 
-  div() %>%
-    overflow(TRUE) %>%
-    expect_html_class("cas-overflow-scroll")
+  z <- div() %>% overflow_vertical(TRUE)
+
+  expect_s3_class(z, "shiny.tag")
+  expect_html_class(z, "overflow-y-scroll")
 })

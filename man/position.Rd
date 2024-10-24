@@ -2,43 +2,42 @@
 % Please edit documentation in R/position.R
 \name{position}
 \alias{position}
-\title{Position an element}
+\title{Positioning elements}
 \usage{
-position(
-  x,
-  value,
-  top = NULL,
-  right = NULL,
-  bottom = NULL,
-  left = NULL,
-  by = "edge"
-)
+position(x, method)
 }
 \arguments{
 \item{x}{A tag element or \link{.style} pronoun.}
 
-\item{value}{One of \code{"static"}, \code{"relative"}, \code{"absolute"}, \code{"fixed"}, or \code{"sticky"} specifying how the element is
-positioned.}
-
-\item{top, right, bottom, left}{One of \code{0}, \code{50}, or \code{100} specifying
-where the element is positioned. By default these values position an
-element using the element's edge, see argument \code{by}. Defaults to \code{NULL}, in
-which case the argument is ignored.}
-
-\item{by}{One of \code{""} or \code{"by-center"} specifying the element's
-positioning anchor, defaults to \code{"edge"}.}
+\item{method}{A character string specifying the positioning method. One of,
+\itemize{
+\item \code{"static"}
+\item \code{"relative"}
+\item \code{"absolute"}
+\item \code{"fixed"}
+\item \code{"sticky"}
+}}
+}
+\value{
+An object of the same type as \code{x}.
 }
 \description{
-The \code{position()} adjusts how an element is positioned. Positioning could be
-absolute or relative. Furthermore, you can arrange an element within its parent
-element using \code{top}, \code{right}, \code{bottom}, or \code{left}.
+The \verb{position_*()} functions adjust set the position of an element.
 }
 \examples{
 
 library(htmltools)
 
 div(
-  div(.style \%>\% position("absolute", t = 0, r = 0))
+  .style \%>\%
+    position("absolute") \%>\%
+    position_top(50)
 )
 
 }
+\seealso{
+Other position utilities: 
+\code{\link{position_centered}()},
+\code{\link{position_sticky}()}
+}
+\concept{position utilities}
